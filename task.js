@@ -46,17 +46,17 @@ function NEW() {
 
 function REMOVE() {
     let removeTask = prompt(`Please enter a number to remove the task:\n${LISTTASK()}`);
-    removeTask = Math.round(parseInt(removeTask));
+    RemoveNumber = Math.round(parseInt(removeTask));
     
-    if (removeTask == "NaN") {
-        REMOVE();
-    }
-    else if (removeTask == 0) {
+    if (removeTask.length == 0) {
         goMainMenu();
     }
-    else if (removeTask > 0 && removeTask <= taskList.length ) {
-        alert(`${taskList[removeTask - 1]} has been removed.`);
-        taskList.splice(removeTask - 1, 1);
+    else if (RemoveNumber == "NaN") {
+        REMOVE();
+    }
+    else if (RemoveNumber > 0 && RemoveNumber <= taskList.length ) {
+        alert(`${taskList[RemoveNumber - 1]} has been removed.`);
+        taskList.splice(RemoveNumber - 1, 1);
         goMainMenu();
     }
     else {
