@@ -8,16 +8,16 @@ goMainMenu();
 function goMainMenu() {
     let MainMenu = prompt(`TASK MANAGER\n\nWhat would you like to do? (Plese enter one of the options below):\n"TASKS" - Display All Tasks\n"NEW" - Add A New Task\n"REMOVE" - Remove A Task\n"CLOSE" - Close The Task Manager\n`);
 
-    if (MainMenu == "CLOSE") {
-        alert(`Thank you for using Task Manager.`);
+    if (MainMenu.toUpperCase() == "CLOSE") {
+        alert("Thank you for using Task Manager.");
     }
-    if (MainMenu == "REMOVE") {
+    if (MainMenu.toUpperCase() == "REMOVE") {
         REMOVE();
     }
-    if (MainMenu == "NEW") {
+    if (MainMenu.toUpperCase() == "NEW") {
         NEW();
     }
-    if (MainMenu == "TASKS") {
+    if (MainMenu.toUpperCase() == "TASKS") {
         TASKS();
     }
     else {
@@ -32,17 +32,36 @@ function NEW() {
         alert("This task is already added")
     }
 
+    else if (newTask == 0) {
+        NEW();
+    }
+
     else if (taskList.includes(newTask) == false) {
         taskList.push(newTask);
         alert("Task successfully added")
         goMainMenu();
     }
+
 }
 
 function REMOVE() {
     let removeTask = prompt(`Please enter a number to remove the task:\n${LISTTASK()}`);
-    taskList.splice((removeTask - 1), 1);
-    goMainMenu();
+    removeTask = Math.round(parseInt(removeTask));
+    
+    if (removeTask == "NaN") {
+        REMOVE();
+    }
+    else if (removeTask == 0) {
+        goMainMenu();
+    }
+    else if (removeTask > 0 && removeTask <= taskList.length ) {
+        alert(`${taskList[removeTask - 1]} has been removed.`);
+        taskList.splice(removeTask - 1, 1);
+        goMainMenu();
+    }
+    else {
+        REMOVE();
+    }
 }
 
 function TASKS() {
